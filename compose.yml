@@ -1,0 +1,43 @@
+services:
+  benchmark:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: a220091:n100
+    env_file:
+      - .env
+    user: "10001:10001"
+    volumes:
+      - a220091-data:/var/lib/a220091
+    restart: "no"
+
+  campaign:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: a220091:n100
+    env_file:
+      - .env
+    user: "10001:10001"
+    volumes:
+      - a220091-data:/var/lib/a220091
+    entrypoint: ["/usr/local/bin/a220091-campaign"]
+    command:
+      - run
+      - --db
+      - /var/lib/a220091/campaign/campaign.db
+      - --start
+      - "${CAMPAIGN_START:?set CAMPAIGN_START}"
+      - --end
+      - "${CAMPAIGN_END:?set CAMPAIGN_END}"
+      - --chunk-size
+      - "${CAMPAIGN_CHUNK_SIZE:-1000000}"
+      - --block-size
+      - "${CAMPAIGN_BLOCK_SIZE:-100000000}"
+      - --threads
+      - "${CAMPAIGN_THREADS:-4}"
+    restart: "no"
+
+volumes:
+  a220091-data:
+    name: a220091-data

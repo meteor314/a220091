@@ -1,0 +1,6 @@
+.git
+.env
+target/
+results/
+independent/__pycache__/
+*.log

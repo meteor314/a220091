@@ -1,0 +1,63 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    name: Deploy via Cloudflared SSH
+    runs-on: ubuntu-latest
+
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install cloudflared
+        run: |
+          curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o cloudflared
+          sudo mv cloudflared /usr/local/bin/cloudflared
+          sudo chmod +x /usr/local/bin/cloudflared
+
+      - name: Setup SSH key and config
+        run: |
+          mkdir -p ~/.ssh
+
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          echo "Host ubuntu-server" > ~/.ssh/config
+          echo "  HostName ${{ secrets.SERVER_HOST }}" >> ~/.ssh/config
+          echo "  User ${{ secrets.SERVER_USER }}" >> ~/.ssh/config
+          echo "  ProxyCommand cloudflared access ssh --hostname ${{ secrets.SERVER_HOST }}" >> ~/.ssh/config
+          echo "  Port 22" >> ~/.ssh/config
+          echo "  StrictHostKeyChecking no" >> ~/.ssh/config
+
+          chmod 600 ~/.ssh/config
+
+      - name: Create project directory on server
+        run: |
+          ssh ubuntu-server "mkdir -p ${{ secrets.SERVER_PATH }}"
+
+      - name: Push code to server via Cloudflared
+        run: |
+          rsync -e "ssh -o StrictHostKeyChecking=no" \
+            -avz \
+            --delete \
+            --exclude 'node_modules' \
+            --exclude 'build' \
+            --exclude '.github' \
+            --exclude '.env' \
+            --exclude '.git' \
+            ./ \
+            ubuntu-server:${{ secrets.SERVER_PATH }}
+
+      - name: Create .env file on server
+        run: |
+          ssh ubuntu-server "echo '${{ secrets.ENV_FILE_CONTENT }}' > ${{ secrets.SERVER_PATH }}/.env && chmod 600 ${{ secrets.SERVER_PATH }}/.env"
+
+      - name: Run remote deploy commands
+        run: |
+          ssh ubuntu-server "cd ${{ secrets.SERVER_PATH }} && nohup docker compose -f compose.yml up -d --build >/dev/null 2>&1 &"

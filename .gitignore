@@ -1,0 +1,9 @@
+.env
+target/
+results/
+notifications/
+logs/
+*.log
+*.tmp
+__pycache__/
+*.py[cod]
