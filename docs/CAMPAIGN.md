@@ -66,6 +66,9 @@ CAMPAIGN_START=1 CAMPAIGN_END=... docker compose up -d campaign
 docker compose run --rm --entrypoint /usr/local/bin/a220091-campaign campaign status
 ```
 
+To import an existing database from `data/db` into the Docker volume, follow
+the backup, copy, and verification steps in the repository [README](../README.md#import-an-existing-database).
+
 ## Timer
 
 `elapsed_seconds` accumulates only while status is RUNNING, measured with a
