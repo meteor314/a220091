@@ -431,40 +431,77 @@ and copied from the machine on which the computation was performed.
 It is provided to facilitate inspection, reproducibility,
 and independent verification of the computational results.
 
-### Database integrity
+### Verifying the campaign database
 
-Check the SQLite database integrity:
-
-```bash
-sqlite3 db/campaign-2026-10-22-175549.db \
-  "PRAGMA integrity_check;"
-```
-
-Expected output:
-
-```text
-ok
-```
-
-Calculate its SHA-256 checksum:
+Run this audit to check that the campaign completed, contains no
+in-conjecture-domain counterexamples, and has no missing, overlapping, or
+malformed chunks or blocks:
 
 ```bash
-sha256sum db/campaign-2026-10-22-175549.db
+sqlite3 -header -column db/campaign-2026-10-22-175549.db "
+WITH
+cfg AS (
+  SELECT range_start, range_end, chunk_size, block_size
+  FROM campaign
+  WHERE id = 1
+),
+issues(issue) AS (
+  SELECT 'campaign is not COMPLETED'
+  FROM campaign
+  WHERE id = 1 AND status <> 'COMPLETED'
+  UNION ALL
+  SELECT 'campaign current_position does not reach range_end + 1'
+  FROM campaign
+  WHERE id = 1 AND current_position <> range_end + 1
+  UNION ALL
+  SELECT 'in-conjecture-domain counterexamples: ' || group_concat(n, ', ')
+  FROM zero_solutions
+  WHERE in_conjecture_domain = 1
+  HAVING COUNT(*) > 0
+  UNION ALL
+  SELECT 'unexpected or malformed chunk starting at ' || c.chunk_start
+  FROM chunks c
+  CROSS JOIN cfg
+  WHERE c.chunk_start < cfg.range_start
+     OR c.chunk_end > cfg.range_end
+     OR c.chunk_end - c.chunk_start + 1 <>
+        MIN(cfg.chunk_size, cfg.range_end - c.chunk_start + 1)
+  UNION ALL
+  SELECT 'overlapping or gapped chunks near ' || c.chunk_start
+  FROM (
+    SELECT chunk_start, chunk_end,
+           lag(chunk_end) OVER (ORDER BY chunk_start) AS previous_end
+    FROM chunks
+  ) c
+  CROSS JOIN cfg
+  WHERE (c.previous_end IS NULL AND c.chunk_start <> cfg.range_start)
+     OR (c.previous_end IS NOT NULL AND c.chunk_start <> c.previous_end + 1)
+  UNION ALL
+  SELECT 'unexpected or malformed block starting at ' || b.block_start
+  FROM blocks b
+  CROSS JOIN cfg
+  WHERE b.block_start < cfg.range_start
+     OR b.block_end > cfg.range_end
+     OR b.block_end - b.block_start + 1 <>
+        MIN(cfg.block_size, cfg.range_end - b.block_start + 1)
+  UNION ALL
+  SELECT 'no chunks recorded'
+  FROM cfg
+  WHERE NOT EXISTS (SELECT 1 FROM chunks)
+  UNION ALL
+  SELECT 'no blocks recorded'
+  FROM cfg
+  WHERE NOT EXISTS (SELECT 1 FROM blocks)
+)
+SELECT issue FROM issues
+UNION ALL
+SELECT 'OK: no counterexamples and no missing, overlapping, or malformed chunks/blocks'
+WHERE NOT EXISTS (SELECT 1 FROM issues);
+"
 ```
 
-### Inspecting the database
-
-List the available tables:
-
-```bash
-sqlite3 db/campaign-2026-10-22-175549.db ".tables"
-```
-
-Inspect the database schema:
-
-```bash
-sqlite3 db/campaign-2026-10-22-175549.db ".schema"
-```
+The command should print only the `OK:` line. Any other output identifies a
+specific database inconsistency.
 
 ---
 
