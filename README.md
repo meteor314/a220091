@@ -425,6 +425,46 @@ A second campaign independently processed the interval from 1 to 100,000.
 | Reported counterexamples |                                                               None |
 
 This campaign provides an additional recorded computation over the initial interval.
+The database was retained from the original campaign execution
+and copied from the machine on which the computation was performed.
+
+It is provided to facilitate inspection, reproducibility,
+and independent verification of the computational results.
+
+### Database integrity
+
+Check the SQLite database integrity:
+
+```bash
+sqlite3 db/campaign-2026-10-22-175549.db \
+  "PRAGMA integrity_check;"
+```
+
+Expected output:
+
+```text
+ok
+```
+
+Calculate its SHA-256 checksum:
+
+```bash
+sha256sum db/campaign-2026-10-22-175549.db
+```
+
+### Inspecting the database
+
+List the available tables:
+
+```bash
+sqlite3 db/campaign-2026-10-22-175549.db ".tables"
+```
+
+Inspect the database schema:
+
+```bash
+sqlite3 db/campaign-2026-10-22-175549.db ".schema"
+```
 
 ---
 
@@ -517,6 +557,8 @@ A completed computation provides evidence for the conjecture only over the integ
 The reported result root provides a deterministic identifier for the campaign results, but a hash alone does not independently establish mathematical correctness.
 
 Independent verification requires access to the implementation, campaign database, canonical result records, and hashing procedure.
+
+I also created a separate small-range campaign covering 1 through 100,000 via naive python code to verify the admissible Q-list and its SHA-256 hash of the canonical result records.
 
 ---
 
