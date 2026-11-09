@@ -7,9 +7,6 @@ N100 (`/var/lib/a220091/checkpoints`, `/var/lib/a220091/campaign-30d`) is **not
 read, imported, modified or deleted** by the new binary; a new campaign starts
 from scratch in `/var/lib/a220091/campaign/campaign.db`.
 
-The verification algorithm, per-chunk hash and result-root format are
-unchanged (see `RESULT_FORMAT.md`).
-
 ## Commands (`a220091-campaign`)
 
 ```text
@@ -53,7 +50,7 @@ folds the block roots in order.
 
 Resident memory is the current block only: the Q-list (8 bytes per q where q,
 6q-1, 6q+1 are all prime, up to `(block_end-1)/2`), the shared base primes
-(O(sqrt(3 * block_end))) and per worker one segment cache (`cache_segments` x
+(O(sqrt(3 \* block_end))) and per worker one segment cache (`cache_segments` x
 `segment_size/8` bytes, default 8 x 128 KiB). The Q-list grows with the block's
 absolute end, not its size. Measured with `benchmark` on the dev machine: block
 end 1e8 -> 51,325 q, oracle 1.06 MB; block end 1e9 -> 352,904 q (2.8 MB), oracle

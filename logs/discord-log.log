@@ -1,0 +1,189 @@
+Captain HookAPP
+ — 
+05/10/2026, 23:27
+A220091 START
+Status: RUNNING
+Range: 18681 -> 100000000000
+Threads: 4
+Chunk size: 1000000
+Block size: 100000000
+A220091 DAILY_PROGRESS
+Status: RUNNING
+Progress: 0.0%
+Range: 18681 -> 100000000000
+Completed through: 1018680
+Chunk: 18681 -> 1018680
+Q candidates: 7783770
+Chunk result: 245d6413889eb4dd7cbbdf1a389ceb0ec060f48087456e7ff3f977115d46284a
+Captain HookAPP
+ — 
+05/10/2026, 23:36
+A220091 START
+Status: RUNNING
+Range: 18681 -> 100000000000
+Threads: 4
+Chunk size: 1000000
+Block size: 100000000
+A220091 IMPORTANT_ERROR
+Status: FAILED
+Campaign stopped with an error; see container logs.
+A220091 START
+Status: RUNNING
+Range: 18681 -> 100000000000
+Threads: 4
+Chunk size: 1000000
+Block size: 100000000
+Captain HookAPP
+ — 
+06/10/2026, 23:37
+A220091 DAILY_PROGRESS
+Status: RUNNING
+Progress: 27.4%
+Range: 18681 -> 100000000000
+Completed through: 27402018680
+Chunk: 27401018681 -> 27402018680
+Q candidates: 14731740
+Chunk result: 8e3f765f5ce23730ecb29bd150dc0c7bbe96db5a2f9508d28ccf3b63b20d0360
+Captain HookAPP
+ — 
+07/10/2026, 23:41
+A220091 DAILY_PROGRESS
+Status: RUNNING
+Progress: 39.0%
+Range: 18681 -> 100000000000
+Completed through: 39004018680
+Chunk: 39003018681 -> 39004018680
+Q candidates: 15049857
+Chunk result: ee6bf666218ebb6d2357397ff942f3e77ebadb4bc61f2902e9c7314f2f86d660
+Captain HookAPP
+ — 
+08/10/2026, 23:50
+A220091 DAILY_PROGRESS
+Status: RUNNING
+Progress: 47.9%
+Range: 18681 -> 100000000000
+Completed through: 47901018680
+Chunk: 47900018681 -> 47901018680
+Q candidates: 15168933
+Chunk result: 9b4fb50592ea92988be662321d0a985dfafe365e27a91e86a8a127699099d91f
+Captain HookAPP
+ — 
+10/10/2026, 00:03
+A220091 DAILY_PROGRESS
+Status: RUNNING
+Progress: 55.4%
+Range: 18681 -> 100000000000
+Completed through: 55404018680
+Chunk: 55403018681 -> 55404018680
+Q candidates: 15210348
+Chunk result: 58b898302ea9ba10d22a286a213a0e4beb07f8488f3209382c76e7251df5ada7
+Captain HookAPP
+ — 
+11/10/2026, 00:18
+A220091 DAILY_PROGRESS
+Status: RUNNING
+Progress: 62.0%
+Range: 18681 -> 100000000000
+Completed through: 62001018680
+Chunk: 62000018681 -> 62001018680
+Q candidates: 15246274
+Chunk result: 663d7e26e8f5c771f6aa8c22cde58cd6989437488626b4581482f6ae54efe5cb
+Captain HookAPP
+ — 
+12/10/2026, 00:20
+A220091 DAILY_PROGRESS
+Status: RUNNING
+Progress: 67.9%
+Range: 18681 -> 100000000000
+Completed through: 67901018680
+Chunk: 67900018681 -> 67901018680
+Q candidates: 15272743
+Chunk result: 732671bdcd1beec334f8543ead30b0b2639046af15a1023e91a387de11d2fa5e
+Captain HookAPP
+ — 
+13/10/2026, 00:45
+A220091 DAILY_PROGRESS
+Status: RUNNING
+Progress: 73.4%
+Range: 18681 -> 100000000000
+Completed through: 73401018680
+Chunk: 73400018681 -> 73401018680
+Q candidates: 15294829
+Chunk result: 8228bb59f0eae2a101d9e421731b0d0a0433d9a67bbd14e534a37a504c11844b
+Captain HookAPP
+ — 
+14/10/2026, 01:05
+A220091 DAILY_PROGRESS
+Status: RUNNING
+Progress: 78.5%
+Range: 18681 -> 100000000000
+Completed through: 78504018680
+Chunk: 78503018681 -> 78504018680
+Q candidates: 15449082
+Chunk result: a955bda8e6fcf58be82a92ecb3960250e2c696df4c6d4f12879a84adad9fd671
+Captain HookAPP
+ — 
+15/10/2026, 01:26
+A220091 DAILY_PROGRESS
+Status: RUNNING
+Progress: 83.3%
+Range: 18681 -> 100000000000
+Completed through: 83302018680
+Chunk: 83301018681 -> 83302018680
+Q candidates: 15464321
+Chunk result: 15c713b878445b84ada7b033c8e32c5bf5663df27341ccb4d984338d4d6eae47
+Captain HookAPP
+ — 
+16/10/2026, 01:36
+A220091 DAILY_PROGRESS
+Status: RUNNING
+Progress: 87.8%
+Range: 18681 -> 100000000000
+Completed through: 87804018680
+Chunk: 87803018681 -> 87804018680
+Q candidates: 15465039
+Chunk result: a23080987fa535e7f9af2a090ecb31458a9995187225390babd61787815d3e19
+Captain HookAPP
+ — 
+17/10/2026, 01:54
+A220091 DAILY_PROGRESS
+Status: RUNNING
+Progress: 92.1%
+Range: 18681 -> 100000000000
+Completed through: 92103018680
+Chunk: 92102018681 -> 92103018680
+Q candidates: 15562781
+Chunk result: 6de8bb23c2a64087f80198e6db0733ee064509f59974611d75557c9f128b329b
+Captain HookAPP
+ — 
+18/10/2026, 02:11
+A220091 DAILY_PROGRESS
+Status: RUNNING
+Progress: 96.2%
+Range: 18681 -> 100000000000
+Completed through: 96203018680
+Chunk: 96202018681 -> 96203018680
+Q candidates: 15537115
+Chunk result: bd989476f4b632db8262e5b21a65ec2e4c1cfcaa8d0d8e6077fa565fd6e5f381
+Captain HookAPP
+ — 
+19/10/2026, 01:03
+A220091 RECOVERY
+Status: RECOVERED
+Previous run ended without a clean stop.
+A220091 COMPLETED
+Status: COMPLETED
+Range: 18681 -> 100000000000
+Q candidates: 1493829701180
+Result root: 4166f1e3482d6a74995ff79756e11a33ed49cdd6b1265bb90b5677707b45986d
+Elapsed seconds: 1128566
+Captain HookAPP
+ — 
+24/10/2026, 21:43
+A220091 COMPLETED
+Status: COMPLETED
+Range: 1 -> 100000
+Processed: 100000
+Q candidates: 630859
+Q hash: bdae99ec86f8c6d97e69730537279033ae37bfdeecaf4ac979af373baa92c5d5
+No counterexample found in the verified interval.

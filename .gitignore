@@ -2,8 +2,9 @@
 target/
 results/
 notifications/
-logs/
+
 *.log
 *.tmp
 __pycache__/
 *.py[cod]
+!discord-log.log
